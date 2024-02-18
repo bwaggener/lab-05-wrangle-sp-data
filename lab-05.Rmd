@@ -1,5 +1,5 @@
 ---
-title: "Lab 04 - La Quinta is Spanish for next to Denny's, Pt. 2"
+title: "Lab 05 - La Quinta is Spanish for next to Denny's, Pt. 2"
 author: "Insert your name here"
 date: "Insert date here"
 output: github_document
