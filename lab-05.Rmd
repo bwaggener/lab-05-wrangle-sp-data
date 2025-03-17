@@ -16,26 +16,52 @@ library(dsbox)
 states <- read_csv("data/states.csv")
 ```
 
+
+
 ### Exercise 1
 
-Remove this text, and add your answer for Exercise 1 here.
-Add code chunks as needed.
-Don't forget to label your code chunk.
-Do not use spaces in code chunk labels.
+"Filter the Denny’s data frame for Alaska (AK) and save the result as dn_ak. How many Denny’s locations are there in Alaska?"
+```{r ex1_dns_alaska}
+dn_ak <- dennys %>%
+  filter(state == "AK")
+nrow(dn_ak)
+
+```
+"Now, do the same for La Quinta data frame for Alaska (AK) and save the result as lq_ak. How many La Quinta locations are there in Alaska?"
+```{r ex1_lq_alaska}
+lq_ak <- laquinta %>%
+  filter(state == "AK")
+nrow(lq_ak)
+
+```
+There are 3 dennys in Alaska and 2 La Quintas in Alaska.
 
 ### Exercise 2
+"Next we will be calculating the distance between all Denny’s and all La Quinta locations in Alaska."
 
-Remove this text, and add your answer for Exercise 1 here.
-Add code chunks as needed.
-Don't forget to label your code chunk.
-Do not use spaces in code chunk labels.
+there are 6 possible pairings between the 3 Denny's and 2 La Quintas in Alaska. 
 
 ### Exercise 3
+"Let’s join the data on Denny’s and La Quinta locations in Alaska, and take a look at what it looks like:"
 
-...
+```{r ex3_fulljoin}
+dn_lq_ak <- full_join(dn_ak, lq_ak, 
+                      by = "state")
+dn_lq_ak
+```
+
 
 ### Exercise 4
+"How many observations are in the joined dn_lq_ak data frame? What are the names of the variables in this data frame."
 
+variable names
+```{r ex4_nrow_ncol}
+nrow(dn_lq_ak)
+ncol(dn_lq_ak)
+names(dn_lq_ak)
+```
+There are 6 observations and 11 variables in the joined data frame. The variables are "address.x"   "city.x"      "state"       "zip.x"       "longitude.x" "latitude.x"  "address.y"   "city.y"     
+  "zip.y"       "longitude.y" "latitude.y" 
 ...
 
 ### Exercise 5
