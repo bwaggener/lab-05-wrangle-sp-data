@@ -1,5 +1,5 @@
 ---
-title: "Lab 05 - La Quinta is Spanish for next to Denny's, Pt. 2"
+title: "Lab 05 - wrangling spacial data"
 author: Ben Waggener
 date: 3/21/2025
 output: github_document

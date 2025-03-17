@@ -1,12 +1,19 @@
-Lab 05 - La Quinta is Spanish for next to Denny’s, Pt. 2
+Lab 05 - wrangling spacial data
 ================
-Insert your name here
-Insert date here
+Ben Waggener
+3/21/2025
 
 ### Load packages and data
 
 ``` r
 library(tidyverse) 
+```
+
+    ## Warning: package 'tidyverse' was built under R version 4.4.3
+
+    ## Warning: package 'purrr' was built under R version 4.4.3
+
+``` r
 library(dsbox) 
 ```
 
