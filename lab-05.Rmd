@@ -116,11 +116,13 @@ dn_lq_ak_mindist %>%
   ggplot(aes(x = address.x, y = closest)) +
   geom_point(binwidth = 100, stat = "identity") +
   theme() +
-  labs(title = "Distances between Denny's and nearest La Quinta in Alaska",
-       x = "Denny's location",
-       y = "Miles to nearest La Quinta")
+  labs(title = "Distances Between Denny's and Nearest La Quinta in Alaska",
+       x = "Denny's Location",
+       y = "Miles to Nearest La Quinta")
+summary(dn_lq_ak_mindist)
 
 ```
+This distribution of distances between Denny's and the nearest La Quinta in Alaska reveals that they are fairly close to eachother, especially considering how large Alaska is. However, it also may  be due to how most of the people and businesses are located in a few cities.
 ### Exercise 9
 
 "Repeat the same analysis for North Carolina: (i) filter Denny’s and La Quinta Data Frames for NC, (ii) join these data frames to get a complete list of all possible pairings, (iii) calculate the distances between all possible pairings of Denny’s and La Quinta in NC, (iv) find the minimum distance between each Denny’s and La Quinta location, (v) visualize and describe the distribution of these shortest distances using appropriate summary statistics."
@@ -160,10 +162,13 @@ dn_lq_nc_mindist %>%
   theme(
     axis.text.x = element_blank()
   ) +
-  labs(title = "Distances between Denny's and nearest La Quinta in North Carolina",
-       x = "Denny's location",
-       y = "Miles to nearest La Quinta")
+  labs(title = "Distances Between Denny's and Nearest La Quinta in North Carolina",
+       x = "Denny's Location",
+       y = "Miles to Nearest La Quinta")
+
+summary(dn_lq_nc_mindist)
 ```
+This distribution of distances between Denny's and the nearest La Quinta in North Carolina reveals that there are some that are clustered close together but also some that are farther away. Suggesting that the joke does not hold as true in NC as it may in other states.
 ### Exercise 10
 "Repeat the same analysis for Texas."
 ```{r ex10_tx}
@@ -196,10 +201,14 @@ dn_lq_tx_mindist %>%
   theme(
     axis.text.x = element_blank()
   ) +
-  labs(title = "Distances between Denny's and nearest La Quinta in Texas",
-       x = "Denny's location",
-       y = "Miles to nearest La Quinta")
+  labs(title = "Distances Between Denny's and Nearest La Quinta in Texas",
+       x = "Denny's Location",
+       y = "Miles to Nearest La Quinta")
+
+summary(dn_lq_tx_mindist)
 ```
+Considering how large texas is, this distribution of distances between Denny's and the nearest La Quinta in Texas reveals that they are generally close to eachother. This suggests that the joke may hold true in Texas.
+
 ### Exercise 11
 "Repeat the same analysis for a state of your choosing, different than the ones we covered so far."
 ```{r ex11_arizona}
@@ -224,6 +233,8 @@ dn_lq_az_mindist <- dn_lq_az %>%
 
 dn_lq_az_mindist <- dn_lq_az_mindist %>%
   mutate(address.x = fct_reorder(address.x, closest))
+
+
 ```
 ```{r ex11_AZvisualization}
 dn_lq_az_mindist %>%
@@ -232,9 +243,11 @@ dn_lq_az_mindist %>%
   theme(
     axis.text.x = element_blank()
   ) +
-  labs(title = "Distances between Denny's and nearest La Quinta in Arizona",
-       x = "Denny's location",
-       y = "Miles to nearest La Quinta")
+  labs(title = "Distances Between Denny's and Nearest La Quinta in Arizona",
+       x = "Denny's Location",
+       y = "Miles to Nearest La Quinta")
+
+summary(dn_lq_az_mindist)
 ```
 
 ### Exercise 12

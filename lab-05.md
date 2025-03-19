@@ -180,16 +180,33 @@ dn_lq_ak_mindist %>%
   ggplot(aes(x = address.x, y = closest)) +
   geom_point(binwidth = 100, stat = "identity") +
   theme() +
-  labs(title = "Distances between Denny's and nearest La Quinta in Alaska",
-       x = "Denny's location",
-       y = "Miles to nearest La Quinta")
+  labs(title = "Distances Between Denny's and Nearest La Quinta in Alaska",
+       x = "Denny's Location",
+       y = "Miles to Nearest La Quinta")
 ```
 
     ## Warning in geom_point(binwidth = 100, stat = "identity"): Ignoring unknown
     ## parameters: `binwidth`
 
-![](lab-05_files/figure-gfm/ex8_visualization-1.png)<!-- --> \###
-Exercise 9
+![](lab-05_files/figure-gfm/ex8_visualization-1.png)<!-- -->
+
+``` r
+summary(dn_lq_ak_mindist)
+```
+
+    ##             address.x    closest     
+    ##  2900 Denali     :1   Min.   :2.035  
+    ##  1929 Airport Way:1   1st Qu.:3.616  
+    ##  3850 Debarr Road:1   Median :5.197  
+    ##                       Mean   :4.410  
+    ##                       3rd Qu.:5.598  
+    ##                       Max.   :5.998
+
+This distribution of distances between Denny’s and the nearest La Quinta
+in Alaska reveals that they are fairly close to eachother, especially
+considering how large Alaska is. However, it also may be due to how most
+of the people and businesses are located in a few cities. \### Exercise
+9
 
 “Repeat the same analysis for North Carolina: (i) filter Denny’s and La
 Quinta Data Frames for NC, (ii) join these data frames to get a complete
@@ -265,16 +282,34 @@ dn_lq_nc_mindist %>%
   theme(
     axis.text.x = element_blank()
   ) +
-  labs(title = "Distances between Denny's and nearest La Quinta in North Carolina",
-       x = "Denny's location",
-       y = "Miles to nearest La Quinta")
+  labs(title = "Distances Between Denny's and Nearest La Quinta in North Carolina",
+       x = "Denny's Location",
+       y = "Miles to Nearest La Quinta")
 ```
 
     ## Warning in geom_point(binwidth = 100, stat = "identity"): Ignoring unknown
     ## parameters: `binwidth`
 
-![](lab-05_files/figure-gfm/ex9_NCvisualization-1.png)<!-- --> \###
-Exercise 10 “Repeat the same analysis for Texas.”
+![](lab-05_files/figure-gfm/ex9_NCvisualization-1.png)<!-- -->
+
+``` r
+summary(dn_lq_nc_mindist)
+```
+
+    ##                            address.x     closest       
+    ##  516 Tyvola Rd                  : 1   Min.   :  1.779  
+    ##  3215 Wake Forest Rd            : 1   1st Qu.: 22.388  
+    ##  7021 Highway 751, #901         : 1   Median : 53.456  
+    ##  4541 Sunset Rd                 : 1   Mean   : 65.444  
+    ##  4380 Fayetteville Rd           : 1   3rd Qu.: 93.985  
+    ##  University of North Carolina At: 1   Max.   :187.935  
+    ##  (Other)                        :22
+
+This distribution of distances between Denny’s and the nearest La Quinta
+in North Carolina reveals that there are some that are clustered close
+together but also some that are farther away. Suggesting that the joke
+does not hold as true in NC as it may in other states. \### Exercise 10
+“Repeat the same analysis for Texas.”
 
 ``` r
 dn_tx <- dennys %>%
@@ -342,17 +377,38 @@ dn_lq_tx_mindist %>%
   theme(
     axis.text.x = element_blank()
   ) +
-  labs(title = "Distances between Denny's and nearest La Quinta in Texas",
-       x = "Denny's location",
-       y = "Miles to nearest La Quinta")
+  labs(title = "Distances Between Denny's and Nearest La Quinta in Texas",
+       x = "Denny's Location",
+       y = "Miles to Nearest La Quinta")
 ```
 
     ## Warning in geom_point(binwidth = 100, stat = "identity"): Ignoring unknown
     ## parameters: `binwidth`
 
-![](lab-05_files/figure-gfm/ex10_TXvisualization-1.png)<!-- --> \###
-Exercise 11 “Repeat the same analysis for a state of your choosing,
-different than the ones we covered so far.”
+![](lab-05_files/figure-gfm/ex10_TXvisualization-1.png)<!-- -->
+
+``` r
+summary(dn_lq_tx_mindist)
+```
+
+    ##                       address.x      closest       
+    ##  607 Avenue Q              :  1   Min.   : 0.0160  
+    ##  1410 Seawall Blvd         :  1   1st Qu.: 0.7305  
+    ##  3600 Santa Ursula         :  1   Median : 3.3715  
+    ##  7619 E Ben White Boulevard:  1   Mean   : 5.7918  
+    ##  28669 I-45 North          :  1   3rd Qu.: 6.6303  
+    ##  1108 S Fort Hood Rd       :  1   Max.   :60.5820  
+    ##  (Other)                   :194
+
+Considering how large texas is, this distribution of distances between
+Denny’s and the nearest La Quinta in Texas reveals that they are
+generally close to eachother. This suggests that the joke may hold true
+in Texas.
+
+### Exercise 11
+
+“Repeat the same analysis for a state of your choosing, different than
+the ones we covered so far.”
 
 ``` r
 dn_az <- dennys %>%
@@ -420,15 +476,28 @@ dn_lq_az_mindist %>%
   theme(
     axis.text.x = element_blank()
   ) +
-  labs(title = "Distances between Denny's and nearest La Quinta in Arizona",
-       x = "Denny's location",
-       y = "Miles to nearest La Quinta")
+  labs(title = "Distances Between Denny's and Nearest La Quinta in Arizona",
+       x = "Denny's Location",
+       y = "Miles to Nearest La Quinta")
 ```
 
     ## Warning in geom_point(binwidth = 100, stat = "identity"): Ignoring unknown
     ## parameters: `binwidth`
 
 ![](lab-05_files/figure-gfm/ex11_AZvisualization-1.png)<!-- -->
+
+``` r
+summary(dn_lq_az_mindist)
+```
+
+    ##                 address.x     closest       
+    ##  2801 No Black Canyon: 1   Min.   :  0.021  
+    ##  6484 E Broadway     : 1   1st Qu.:  4.629  
+    ##  825 S 48th St       : 1   Median :  7.946  
+    ##  2122 S Milton Road  : 1   Mean   : 36.936  
+    ##  8131 W Bell Rd      : 1   3rd Qu.: 38.067  
+    ##  7400 W Chandler Blvd: 1   Max.   :242.734  
+    ##  (Other)             :77
 
 ### Exercise 12
 
