@@ -136,7 +136,7 @@ haversine <- function(long1, lat1, long2, lat2, round = 3) {
   a <- sin((lat2 - lat1) / 2)^2 + cos(lat1) * cos(lat2) * sin((long2 - long1) / 2)^2
   d <- R * 2 * asin(sqrt(a))
 
-  return(round(d, round)) # distance in km
+  return(round(d, round)) 
 }
 ```
 
@@ -165,7 +165,7 @@ dn_lq_ak_mindist <- dn_lq_ak %>%
   summarize(closest = min(distance))
 
 dn_lq_ak_mindist <- dn_lq_ak_mindist %>%
-  mutate(address.x = factor(address.x)) %>%  # Ensure it's a factor first
+  mutate(address.x = factor(address.x)) %>%  
   mutate(address.x = fct_relevel(address.x, "2900 Denali", "1929 Airport Way", "3850 Debarr Road"))
 ```
 
@@ -182,7 +182,7 @@ dn_lq_ak_mindist %>%
   theme() +
   labs(title = "Distances Between Denny's and Nearest La Quinta in Alaska",
        x = "Denny's Location",
-       y = "Miles to Nearest La Quinta")
+       y = "KM to Nearest La Quinta")
 ```
 
     ## Warning in geom_point(binwidth = 100, stat = "identity"): Ignoring unknown
@@ -284,7 +284,7 @@ dn_lq_nc_mindist %>%
   ) +
   labs(title = "Distances Between Denny's and Nearest La Quinta in North Carolina",
        x = "Denny's Location",
-       y = "Miles to Nearest La Quinta")
+       y = "KM to Nearest La Quinta")
 ```
 
     ## Warning in geom_point(binwidth = 100, stat = "identity"): Ignoring unknown
@@ -379,7 +379,7 @@ dn_lq_tx_mindist %>%
   ) +
   labs(title = "Distances Between Denny's and Nearest La Quinta in Texas",
        x = "Denny's Location",
-       y = "Miles to Nearest La Quinta")
+       y = "KM to Nearest La Quinta")
 ```
 
     ## Warning in geom_point(binwidth = 100, stat = "identity"): Ignoring unknown
@@ -478,7 +478,7 @@ dn_lq_az_mindist %>%
   ) +
   labs(title = "Distances Between Denny's and Nearest La Quinta in Arizona",
        x = "Denny's Location",
-       y = "Miles to Nearest La Quinta")
+       y = "KM to Nearest La Quinta")
 ```
 
     ## Warning in geom_point(binwidth = 100, stat = "identity"): Ignoring unknown
