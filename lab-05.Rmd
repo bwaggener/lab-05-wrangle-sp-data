@@ -65,11 +65,178 @@ There are 6 observations and 11 variables in the joined data frame. The variable
 ...
 
 ### Exercise 5
+"What function from the tidyverse do we use the add a new variable to a data frame while keeping the existing variables?"
+mutate
+
+```{r ex5_mutate}
+haversine <- function(long1, lat1, long2, lat2, round = 3) {
+  # convert to radians
+  long1 <- long1 * pi / 180
+  lat1 <- lat1 * pi / 180
+  long2 <- long2 * pi / 180
+  lat2 <- lat2 * pi / 180
+
+  R <- 6371 # Earth mean radius in km
+
+  a <- sin((lat2 - lat1) / 2)^2 + cos(lat1) * cos(lat2) * sin((long2 - long1) / 2)^2
+  d <- R * 2 * asin(sqrt(a))
+
+  return(round(d, round)) # distance in km
+}
+```
 
 ...
 
 ### Exercise 6
+"Calculate the distances between all pairs of Denny’s and La Quinta locations and save this variable as distance. Make sure to save this variable in THE dn_lq_ak data frame, so that you can use it later."
 
-...
+```{r ex6_distances}
+dn_lq_ak <- dn_lq_ak %>%
+  mutate(distance = haversine(longitude.x, latitude.x, longitude.y, latitude.y))
 
-Add exercise headings as needed.
+```
+
+### Exercise 7
+"Calculate the minimum distance between a Denny’s and La Quinta for each Denny’s location. To do so we group by Denny’s locations and calculate a new variable that stores the information for the minimum distance."
+```{r ex7_min_distance}
+dn_lq_ak_mindist <- dn_lq_ak %>%
+  group_by(address.x) %>%
+  summarize(closest = min(distance))
+
+dn_lq_ak_mindist <- dn_lq_ak_mindist %>%
+  mutate(address.x = factor(address.x)) %>%  # Ensure it's a factor first
+  mutate(address.x = fct_relevel(address.x, "2900 Denali", "1929 Airport Way", "3850 Debarr Road"))
+```
+
+### Exercise 8
+"Describe the distribution of the distances Denny’s and the nearest La Quinta locations in Alaska. Also include an appropriate visualization and relevant summary statistics."
+
+```{r ex8_visualization}
+dn_lq_ak_mindist %>%
+  ggplot(aes(x = address.x, y = closest)) +
+  geom_point(binwidth = 100, stat = "identity") +
+  theme() +
+  labs(title = "Distances between Denny's and nearest La Quinta in Alaska",
+       x = "Denny's location",
+       y = "Miles to nearest La Quinta")
+
+```
+### Exercise 9
+
+"Repeat the same analysis for North Carolina: (i) filter Denny’s and La Quinta Data Frames for NC, (ii) join these data frames to get a complete list of all possible pairings, (iii) calculate the distances between all possible pairings of Denny’s and La Quinta in NC, (iv) find the minimum distance between each Denny’s and La Quinta location, (v) visualize and describe the distribution of these shortest distances using appropriate summary statistics."
+
+```{r ex9_nc}
+dn_nc <- dennys %>%
+  filter(state == "NC")
+nrow(dn_nc)
+
+lq_nc <- laquinta %>%
+  filter(state == "NC")
+nrow(lq_nc)
+
+```
+
+```{r ex9_fulljoin}
+dn_lq_nc <- full_join(dn_nc, lq_nc, 
+                      by = "state")
+dn_lq_nc
+```
+```{r ex9_distances}
+dn_lq_nc <- dn_lq_nc %>%
+  mutate(distance = haversine(longitude.x, latitude.x, longitude.y, latitude.y))
+
+dn_lq_nc_mindist <- dn_lq_nc %>%
+  group_by(address.x) %>%
+  summarize(closest = min(distance))
+
+dn_lq_nc_mindist <- dn_lq_nc_mindist %>%
+  mutate(address.x = fct_reorder(address.x, closest)) 
+```
+
+```{r ex9_NCvisualization}
+dn_lq_nc_mindist %>%
+  ggplot(aes(x = address.x, y = closest)) +
+  geom_point(binwidth = 100, stat = "identity") +
+  theme(
+    axis.text.x = element_blank()
+  ) +
+  labs(title = "Distances between Denny's and nearest La Quinta in North Carolina",
+       x = "Denny's location",
+       y = "Miles to nearest La Quinta")
+```
+### Exercise 10
+"Repeat the same analysis for Texas."
+```{r ex10_tx}
+dn_tx <- dennys %>%
+  filter(state == "TX")
+nrow(dn_tx)
+
+lq_tx <- laquinta %>%
+  filter(state == "TX")
+nrow(lq_tx)
+
+dn_lq_tx <- full_join(dn_tx, lq_tx, 
+                      by = "state")
+dn_lq_tx
+
+dn_lq_tx <- dn_lq_tx %>%
+  mutate(distance = haversine(longitude.x, latitude.x, longitude.y, latitude.y))
+
+dn_lq_tx_mindist <- dn_lq_tx %>%
+  group_by(address.x) %>%
+  summarize(closest = min(distance))
+
+dn_lq_tx_mindist <- dn_lq_tx_mindist %>%
+  mutate(address.x = fct_reorder(address.x, closest)) 
+```
+```{r ex10_TXvisualization}
+dn_lq_tx_mindist %>%
+  ggplot(aes(x = address.x, y = closest)) +
+  geom_point(binwidth = 100, stat = "identity") +
+  theme(
+    axis.text.x = element_blank()
+  ) +
+  labs(title = "Distances between Denny's and nearest La Quinta in Texas",
+       x = "Denny's location",
+       y = "Miles to nearest La Quinta")
+```
+### Exercise 11
+"Repeat the same analysis for a state of your choosing, different than the ones we covered so far."
+```{r ex11_arizona}
+dn_az <- dennys %>%
+  filter(state == "AZ")
+nrow(dn_az)
+
+lq_az <- laquinta %>%
+  filter(state == "AZ")
+nrow(lq_az)
+
+dn_lq_az <- full_join(dn_az, lq_az, 
+                      by = "state")
+dn_lq_az
+
+dn_lq_az <- dn_lq_az %>%
+  mutate(distance = haversine(longitude.x, latitude.x, longitude.y, latitude.y))
+
+dn_lq_az_mindist <- dn_lq_az %>%
+  group_by(address.x) %>%
+  summarize(closest = min(distance))
+
+dn_lq_az_mindist <- dn_lq_az_mindist %>%
+  mutate(address.x = fct_reorder(address.x, closest))
+```
+```{r ex11_AZvisualization}
+dn_lq_az_mindist %>%
+  ggplot(aes(x = address.x, y = closest)) +
+  geom_point(binwidth = 100, stat = "identity") +
+  theme(
+    axis.text.x = element_blank()
+  ) +
+  labs(title = "Distances between Denny's and nearest La Quinta in Arizona",
+       x = "Denny's location",
+       y = "Miles to nearest La Quinta")
+```
+
+### Exercise 12
+"Among the states you examined, where is Mitch Hedberg’s joke most likely to hold true? Explain your reasoning."
+Texas seems to fit the joke the best. The distances between Denny's and La Quinta locations in Texas are generally shorter than in the other states that I looked at. Just by looking at the range of distances between Denny's and La Quinta locations, Texas has the lowest maximum range of distances and the vast majority are within 10 miles of each other. 
